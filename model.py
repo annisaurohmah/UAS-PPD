@@ -13,7 +13,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-df = pd.read_csv('https://raw.githubusercontent.com/annisaurohmah/dataset-ppd/refs/heads/main/Real%20estate%20valuation%20data%20set.csv', delimiter=',')
+df = pd.read_csv('data/real_estate.csv', delimiter=',')
 df = df.map(lambda x: float(str(x).replace(",", ".")) if isinstance(x, str) and x.replace(",", ".").replace(".", "", 1).isdigit() else x)
 
 
