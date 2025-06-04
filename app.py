@@ -6,7 +6,7 @@ import pandas as pd
 
 
 # Load the trained model
-model = joblib.load('rf_model.sav')
+model = joblib.load('best_model_rf.joblib')
 
 # Judul aplikasi
 st.title("Prediksi Harga Rumah di Taipei")
