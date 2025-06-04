@@ -107,4 +107,4 @@ print(f"RMSE (Root Mean Squared Error): {rmse:.2f}")
 print(f"R²   (R-squared):               {r2:.2f}")
 
 # save the model to disk
-joblib.dump(rf, "rf_model.sav")
+joblib.dump(rf, "best_model_rf.joblib")
