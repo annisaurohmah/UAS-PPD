@@ -12,6 +12,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import joblib
 
 df = pd.read_csv('data/real_estate.csv', delimiter=',')
 df = df.map(lambda x: float(str(x).replace(",", ".")) if isinstance(x, str) and x.replace(",", ".").replace(".", "", 1).isdigit() else x)
@@ -104,3 +105,6 @@ print(f"MAE  (Mean Absolute Error):      {mae:.2f}")
 print(f"MSE  (Mean Squared Error):      {mse:.2f}")
 print(f"RMSE (Root Mean Squared Error): {rmse:.2f}")
 print(f"R²   (R-squared):               {r2:.2f}")
+
+# save the model to disk
+joblib.dump(rf, "rf_model.sav")
