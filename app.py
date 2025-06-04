@@ -9,10 +9,10 @@ import pandas as pd
 model = joblib.load('best_model_rf.joblib')
 
 # Judul aplikasi
-st.title("Prediksi Harga Rumah di Taipei")
+st.title("🏘️ Prediksi Harga Rumah di Taipei")
 st.image("data/taipei.jpg", use_container_width=True)
 # Deskripsi aplikasi
-st.write("Aplikasi ini memprediksi harga rumah berdasarkan beberapa fitur seperti tanggal transaksi, usia rumah, jarak ke MRT, jumlah convenience store, dan koordinat geografis (latitude dan longitude).")
+st.write("Aplikasi web ini dirancang untuk membantu pengguna, seperti calon pembeli, agen properti, dan pemilik real estate, dalam memprediksi harga rumah per unit area secara akurat di wilayah Taipei, Taiwan. Dengan memanfaatkan model Random Forest Regression yang telah dilatih menggunakan data historis properti, pengguna cukup memasukkan enam parameter penting yaitu tanggal transaksi, usia rumah, jarak ke MRT terdekat, jumlah minimarket terdekat, serta koordinat geografis (latitude dan longitude).")
 
 # Form input dari pengguna
 st.header("Masukkan Data Rumah")
@@ -33,7 +33,7 @@ def date_to_decimal(date):
 X1 = date_to_decimal(date_input)
 X2 = st.number_input("Umur Rumah (tahun)", min_value=0.0, step=0.1)
 X3 = st.number_input("Jarak ke MRT Terdekat (meter)", min_value=0.0, step=1.0)
-X4 = st.number_input("Jumlah Convenience Store", min_value=0, step=1)
+X4 = st.number_input("Jumlah Minimarket Sekitar yang Dapat Dijangkau dengan Berjalan Kaki", min_value=0, step=1)
 X5 = st.number_input("Latitude", format="%.6f")
 X6 = st.number_input("Longitude", format="%.6f")
 
@@ -45,7 +45,7 @@ if st.button("Prediksi Harga"):
     "Tanggal Transaksi": [X1],
     "Umur Bangunan": [X2],
     "Jarak ke MRT": [X3],
-    "Jumlah Convenience Stores": [X4],
+    "Jumlah Minimarket Terdekat": [X4],
     "Latitude": [X5],
     "Longitude": [X6]
 }
@@ -54,7 +54,7 @@ if st.button("Prediksi Harga"):
 
     input_data = np.array([[X1, X2, X3, X4, X5, X6]])
     prediction = model.predict(input_data)[0]
-    st.success(f"Perkiraan harga rumah per unit area: {prediction:.2f}")
+    st.success(f"Perkiraan harga rumah per unit area: {prediction:.2f} New Taiwan Dollar/Ping (1 Ping = 3.3 meter persegi)")
 
     df_map = pd.DataFrame({'lat': [X5], 'lon': [X6]})
     st.map(df_map)
